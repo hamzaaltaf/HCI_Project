@@ -15,5 +15,3 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-
-$(document).on('click','.closeFilter',function(){$(".mobile-filter-sidebar").animate({"left":"-251px"},250,"linear",function(){});$('.menu-overly-mask').removeClass('is-visible');});$('#selectRegion').on('shown.bs.modal',function(e){$("ul.list-link li a").click(function(){$('ul.list-link li a').removeClass('active');$(this).addClass('active');$(".cityName").text($(this).text());$('#selectRegion').modal('hide');});});$("#checkAll").click(function(){$('.add-img-selector input:checkbox').not(this).prop('checked',this.checked);});});
