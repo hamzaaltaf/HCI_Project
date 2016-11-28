@@ -1,0 +1,65 @@
+<div id="wrapper">
+  <div class="main-container">
+<div class="container">
+<div class="row">
+<div class="col-sm-3">
+  
+</div>
+<div class="col-sm-9 page-content col-thin-left">
+<div class="category-list">
+
+
+  <% @events.each do |e|%>
+  <% admin = e.organizer_details(e)%>
+  <div class="adds-wrapper jobs-list">
+  <div class="item-list job-item">
+  
+  <div class="col-sm-10  col-xs-10  ">
+  <div class="add-details jobs-item">
+  <h5 class="company-title "><a href="#"><%=admin.firstname%></a><span><%= link_to 'Edit', edit_event_path(:id => e.id)%></span></h5>
+  
+  <h4 class="job-title"><a href="<%= event_path(:id => e.id)%>"> <%= e.title%> </a></h4>
+  <span class="info-row"> <span class="item-location"><i class="fa fa-map-marker"></i> <%= e.address %> </span>
+  <div class="jobs-desc">
+    <% if !e.description.nil? %>
+      <% if e.description.length > 150%>
+      <%= truncate(e.description.html_safe, length: 150) %>
+      <%= link_to '...Read more', '', class: "read-more-#{e.id}" %>
+      <script>
+        $('.read-more-<%= e.id %>').on('click', function(ea) {
+          ea.preventDefault()
+          $(this).parent().html('<%= escape_javascript e.description.html_safe %>')
+        })
+      </script>
+      <% else %>
+      <%= e.description.html_safe %>
+      <br>
+      <% end %>
+    <%end%>
+  </div>
+  <div class="job-actions">
+  <ul class="list-unstyled list-inline">
+  <% if e.user_id != current_user.id%>
+  <li>
+  <a href="#" class="save-job">
+  <span class="fa fa-star-o"></span>
+      Participate
+  </a>
+  </li>
+  <%end%>
+  <li>
+  <a href="<%= event_path(:id => e.id)%>" class="save-job">
+  <span class="fa fa-star-o"></span>
+      See Details
+  </a>
+  </li>
+  <li>
+  </li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <%end%>
+</div>

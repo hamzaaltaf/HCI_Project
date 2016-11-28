@@ -1,0 +1,103 @@
+<div class="main-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 page-content">
+        <div class="inner-box category-content">
+          <h2 class="title-2"><i class="icon-user-add"></i> Create your event and let people join </h2>
+          <div class="row">
+            <div class="col-sm-12">
+              <%= form_for @event,:url =>{:controller=>"events",:action=>"create"} do |f| %>
+                <div class="form-group required">
+                  <label class="col-md-4 control-label">Title <sup>*</sup></label>
+                  <div class="col-md-6">
+                    <%= f.text_field :title, autofocus: true, class: 'question-ask-field form-control',placeholder: 'Title of your Event'%> <br>
+                  </div>
+                </div>
+                
+                <!---->
+                <div class="form-group required">
+                  <label class="col-md-4 control-label">Description<sup>*</sup></label>
+                  <div class="col-md-6">
+                    <%= f.text_area :description, class: 'form-control', placeholder: 'Explain your event to the people',rows: "3"  %><br/>
+                  </div>
+                </div>
+                <hr>
+                <!---->
+                <div class="form-group required">
+                  <label class="col-md-4 control-label">Skills Required<sup>*</sup></label>
+                  <div class="col-md-6">
+                    <%= f.select :skills,options_for_select(get_all_interests.sort!), {}, {:multiple => true, :size =>3 }%>
+                  </div>
+                </div>
+                <!---->
+                
+                <div class="form-group required" style="margin-top:2em;">
+                  <label class="col-md-4 control-label">Age Preffered <sup>*</sup></label>
+                  <div class="col-md-3">
+                    <%= f.text_field :min_age, autofocus: true, class: 'question-ask-field form-control'%>
+                  </div>
+                  <div class="col-md-3">
+                    <%= f.text_field :max_age, autofocus: true, class: 'question-ask-field form-control'%><br/>
+                  </div>
+                </div>
+                <!--contact info-->
+                <div class="row">
+                  <div class="form-group required">
+                    <label class="col-md-4 control-label">Street Address<sup>*</sup></label>
+                    <div class="col-md-4">
+                      <%= f.text_field :address, autofocus: true, class: 'question-ask-field form-control', placeholder:''%>
+                    </div>
+                    <div class="col-md-2">
+                      <%= f.select :city,options_for_select(get_all_cities.sort!), {}, {:multiple => false}%><br/>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+                <!---->
+                 <div class="form-group required">
+                  <label class="col-md-4 control-label"><sup></sup>Upload Image</label>
+                  <div class="col-md-6">
+                    <%= f.file_field :image, class: 'form-control btn btn-default'%><br/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-4 control-label"></label>
+                  <div class="col-md-8">
+                    <div class="termbox mb10">
+                  </div>
+                  <div style="clear:both"></div>
+                  <%= f.submit "Submit",class:"btn btn-primary" %>
+                </div>
+              </div>
+              </div>
+            <%end%>  
+            <br>
+          </div>
+        </div>
+      </div>
+      <!--sidebr-->
+      <div class="col-md-4 reg-sidebar">
+        <div class="reg-sidebar-inner text-center">
+          <div class="promo-text-box">
+            <%=fa_icon "picture 4x color-1"%>
+            <h3><strong>Post a Free Event</strong></h3>
+            <p> Post your free online classified ads with us. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. </p>
+          </div>
+          <div class="promo-text-box">
+            <%=fa_icon "pencil 4x color-1"%>
+            <h3><strong>Create and Manage Events</strong></h3>
+            <p> Nam sit amet dui vel orci venenatis ullamcorper eget in lacus.
+            Praesent tristique elit pharetra magna efficitur laoreet.</p>
+          </div>
+        <div class="promo-text-box"><i class="  icon-heart-2 fa fa-4x icon-color-3"></i>
+          <%=fa_icon "heart 4x color-1"%>
+          <h3><strong>Get Reviews of Event</strong></h3>
+          <p> PostNullam quis orci ut ipsum mollis malesuada varius eget metus.
+          Nulla aliquet dui sed quam iaculis, ut finibus massa tincidunt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

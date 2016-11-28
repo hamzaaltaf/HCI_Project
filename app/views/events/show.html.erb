@@ -1,0 +1,91 @@
+<%= render 'participate'%>
+<div class="main-container">
+  <div class="container">
+<div class="row">
+<div class="col-sm-9 page-content col-thin-right">
+<div class="inner inner-box ads-details-wrapper">
+<h2><%= @event.title%>   in
+<% @event.skills[0..2].sort.each do |topic| %>
+     <small><span class="lable label-warning " style="color:#fff"><%=topic.titleize%></span></small> 
+<% end %>
+</h2>
+<span class="info-row"> <span class="date"><i class=" icon-clock"> </i> <%=@event.created_at%> </span>-<span>, <%=@event.city%></span>
+<div class="ads-image">
+<ul class="bxslider">
+<li><%= image_tag @event.image.thumb%></li>
+</ul>
+</div>
+
+<div class="Ads-Details">
+<h5 class="list-title"><strong>Event Details</strong></h5>
+<div class="row">
+<div class="ads-details-info col-md-8">
+<p><%=@event.description%></p>
+
+</div>
+<div class="col-md-4">
+<aside class="panel panel-body panel-details">
+<ul>
+<li>
+<p class=" no-margin "><strong>Age Preferce:</strong> <%= @event.min_age%> - <%= @event.max_age%></p>
+</li>
+<li>
+<p class="no-margin"><strong>Location:</strong> <%= @event.address%>,<%@event.city%> </p>
+</li>
+</ul>
+</aside>
+<div class="ads-action">
+</div>
+</div>
+</div>
+ <% if @event.user_id != current_user.id && !@event.participants.find_by(uid: current_user.id)%>
+<div class="content-footer text-left">
+    <% @participate = @event.participants.build%>
+    <%= form_for @participate,:url => {:controller => 'events',:action => 'participate',:event_id => @event.id,:uid => current_user.id}, remote: true do |f|%>
+        <%= f.hidden_field :uid, :value => current_user.id%>    
+        <%= f.submit "Participate", class:'btn btn-info'%>
+    <%end%>
+</div>
+<%else%>
+<div><button class="btn btn-info disabled" id="part_btn">Participated</button></div>
+<%end%>
+</div>
+</div>
+
+</div>
+
+<div class="col-sm-3  page-sidebar-right">
+<aside>
+<div class="panel sidebar-panel panel-contact-seller">
+<div class="panel-heading">Contact Organizer</div>
+<div class="panel-content user-info">
+<div class="panel-body text-center">
+<div class="seller-info">
+    <% admin  = @event.organizer_details(@event)%>
+<h3 class="no-margin"><%= admin.firstname + ' ' + admin.lastname %></h3>
+<p>Location: <strong><%= admin.city%></strong></p>
+</div>
+<div class="user-ads-action"><a class="btn  btn-info btn-block"><i class=" icon-phone-1"></i> <%= admin.phone%>
+</a></div>
+</div>
+</div>
+</div>
+<div class="panel sidebar-panel">
+<div class="panel-heading">Tips for Vlounteers</div>
+<div class="panel-content">
+<div class="panel-body text-left">
+<ul class="list-check">
+<li> Check if organizer is verified</li>
+<li> See the Requirments</li>
+<li> Please post reviews of event</li>
+</ul>
+</div>
+</div>
+</div>
+
+</aside>
+</div>
+
+</div>
+</div>
+</div>
